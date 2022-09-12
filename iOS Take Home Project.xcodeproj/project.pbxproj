@@ -23,6 +23,7 @@
 		3D2A6DD428CF8D1800BF2614 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3D2A6DDC28CF8D8600BF2614 /* Symbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbols.swift; sourceTree = "<group>"; };
 		3D2A6DDE28CF906500BF2614 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		3D2A6DF028CFAA6600BF2614 /* iOS-Take-Home-Project-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "iOS-Take-Home-Project-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +56,9 @@
 		3D2A6DCC28CF8D1700BF2614 /* iOS Take Home Project */ = {
 			isa = PBXGroup;
 			children = (
+				3D2A6DF028CFAA6600BF2614 /* iOS-Take-Home-Project-Info.plist */,
+				3D2A6DE128CF944A00BF2614 /* Base */,
+				3D2A6DE028CF944400BF2614 /* Features */,
 				3D2A6DDB28CF8D3800BF2614 /* Resources */,
 				3D2A6DCD28CF8D1700BF2614 /* iOS_Take_Home_ProjectApp.swift */,
 				3D2A6DCF28CF8D1700BF2614 /* ContentView.swift */,
@@ -79,6 +83,124 @@
 				3D2A6DDE28CF906500BF2614 /* Theme.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		3D2A6DE028CF944400BF2614 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				3D2A6DE528CF946100BF2614 /* Settings */,
+				3D2A6DE428CF945C00BF2614 /* Detail */,
+				3D2A6DE328CF945600BF2614 /* Create */,
+				3D2A6DE228CF945100BF2614 /* People */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		3D2A6DE128CF944A00BF2614 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		3D2A6DE228CF945100BF2614 /* People */ = {
+			isa = PBXGroup;
+			children = (
+				3D2A6DE628CF946800BF2614 /* Views */,
+				3D2A6DE728CF946D00BF2614 /* Models */,
+				3D2A6DE828CF947200BF2614 /* ViewModels */,
+			);
+			path = People;
+			sourceTree = "<group>";
+		};
+		3D2A6DE328CF945600BF2614 /* Create */ = {
+			isa = PBXGroup;
+			children = (
+				3D2A6DEB28CF94B900BF2614 /* Views */,
+				3D2A6DEA28CF94B400BF2614 /* Models */,
+				3D2A6DE928CF94AD00BF2614 /* ViewModels */,
+			);
+			path = Create;
+			sourceTree = "<group>";
+		};
+		3D2A6DE428CF945C00BF2614 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				3D2A6DEF28CF94D600BF2614 /* Views */,
+				3D2A6DEE28CF94D000BF2614 /* Models */,
+				3D2A6DEC28CF94C200BF2614 /* ViewModels */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		3D2A6DE528CF946100BF2614 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		3D2A6DE628CF946800BF2614 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3D2A6DE728CF946D00BF2614 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3D2A6DE828CF947200BF2614 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3D2A6DE928CF94AD00BF2614 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3D2A6DEA28CF94B400BF2614 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3D2A6DEB28CF94B900BF2614 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3D2A6DEC28CF94C200BF2614 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3D2A6DEE28CF94D000BF2614 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3D2A6DEF28CF94D600BF2614 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,9 +407,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"iOS Take Home Project/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS-Take-Home-Project-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -313,9 +435,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"iOS Take Home Project/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS-Take-Home-Project-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

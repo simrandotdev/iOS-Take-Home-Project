@@ -13,6 +13,12 @@
 		3D2A6DD528CF8D1800BF2614 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D2A6DD428CF8D1800BF2614 /* Preview Assets.xcassets */; };
 		3D2A6DDD28CF8D8600BF2614 /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6DDC28CF8D8600BF2614 /* Symbols.swift */; };
 		3D2A6DDF28CF906500BF2614 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6DDE28CF906500BF2614 /* Theme.swift */; };
+		3D2A6DF228D0D58100BF2614 /* UserStaticData.json in Resources */ = {isa = PBXBuildFile; fileRef = 3D2A6DF128D0D58100BF2614 /* UserStaticData.json */; };
+		3D2A6DF528D0DC7C00BF2614 /* UserDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6DF428D0DC7C00BF2614 /* UserDetailResponse.swift */; };
+		3D2A6DF728D0DCDF00BF2614 /* UsersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6DF628D0DCDF00BF2614 /* UsersResponse.swift */; };
+		3D2A6DFA28D0DD7600BF2614 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6DF928D0DD7600BF2614 /* User.swift */; };
+		3D2A6DFC28D0DD8500BF2614 /* Suppoprt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6DFB28D0DD8500BF2614 /* Suppoprt.swift */; };
+		3D2A6DFF28D0DDA100BF2614 /* StaticJSONMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6DFE28D0DDA100BF2614 /* StaticJSONMapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,13 @@
 		3D2A6DDC28CF8D8600BF2614 /* Symbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbols.swift; sourceTree = "<group>"; };
 		3D2A6DDE28CF906500BF2614 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		3D2A6DF028CFAA6600BF2614 /* iOS-Take-Home-Project-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "iOS-Take-Home-Project-Info.plist"; sourceTree = SOURCE_ROOT; };
+		3D2A6DF128D0D58100BF2614 /* UserStaticData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserStaticData.json; sourceTree = "<group>"; };
+		3D2A6DF328D0D5AD00BF2614 /* SingleUserData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SingleUserData.json; sourceTree = "<group>"; };
+		3D2A6DF428D0DC7C00BF2614 /* UserDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailResponse.swift; sourceTree = "<group>"; };
+		3D2A6DF628D0DCDF00BF2614 /* UsersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersResponse.swift; sourceTree = "<group>"; };
+		3D2A6DF928D0DD7600BF2614 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		3D2A6DFB28D0DD8500BF2614 /* Suppoprt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suppoprt.swift; sourceTree = "<group>"; };
+		3D2A6DFE28D0DDA100BF2614 /* StaticJSONMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticJSONMapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +94,8 @@
 			children = (
 				3D2A6DDC28CF8D8600BF2614 /* Symbols.swift */,
 				3D2A6DDE28CF906500BF2614 /* Theme.swift */,
+				3D2A6DF128D0D58100BF2614 /* UserStaticData.json */,
+				3D2A6DF328D0D5AD00BF2614 /* SingleUserData.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -99,6 +114,8 @@
 		3D2A6DE128CF944A00BF2614 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				3D2A6DFD28D0DD9600BF2614 /* Mapper */,
+				3D2A6DF828D0DD6200BF2614 /* Models */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -150,6 +167,7 @@
 		3D2A6DE728CF946D00BF2614 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3D2A6DF628D0DCDF00BF2614 /* UsersResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -192,6 +210,7 @@
 		3D2A6DEE28CF94D000BF2614 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3D2A6DF428D0DC7C00BF2614 /* UserDetailResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -201,6 +220,23 @@
 			children = (
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		3D2A6DF828D0DD6200BF2614 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3D2A6DF928D0DD7600BF2614 /* User.swift */,
+				3D2A6DFB28D0DD8500BF2614 /* Suppoprt.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3D2A6DFD28D0DD9600BF2614 /* Mapper */ = {
+			isa = PBXGroup;
+			children = (
+				3D2A6DFE28D0DDA100BF2614 /* StaticJSONMapper.swift */,
+			);
+			path = Mapper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D2A6DD528CF8D1800BF2614 /* Preview Assets.xcassets in Resources */,
+				3D2A6DF228D0D58100BF2614 /* UserStaticData.json in Resources */,
 				3D2A6DD228CF8D1800BF2614 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,8 +312,13 @@
 			files = (
 				3D2A6DDD28CF8D8600BF2614 /* Symbols.swift in Sources */,
 				3D2A6DDF28CF906500BF2614 /* Theme.swift in Sources */,
+				3D2A6DFF28D0DDA100BF2614 /* StaticJSONMapper.swift in Sources */,
 				3D2A6DD028CF8D1700BF2614 /* ContentView.swift in Sources */,
+				3D2A6DF528D0DC7C00BF2614 /* UserDetailResponse.swift in Sources */,
 				3D2A6DCE28CF8D1700BF2614 /* iOS_Take_Home_ProjectApp.swift in Sources */,
+				3D2A6DF728D0DCDF00BF2614 /* UsersResponse.swift in Sources */,
+				3D2A6DFC28D0DD8500BF2614 /* Suppoprt.swift in Sources */,
+				3D2A6DFA28D0DD7600BF2614 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

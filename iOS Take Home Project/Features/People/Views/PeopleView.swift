@@ -17,45 +17,13 @@ struct PeopleView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Theme.Colors.background
-                    .ignoresSafeArea(edges: .top)
+                background
                 
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 16) {
                         ForEach(0...15, id: \.self) { item in
-                            
-                            VStack(spacing: .zero) {
-                                Rectangle()
-                                    .fill(.blue)
-                                    .frame(height: 130)
-                                
-                                VStack(alignment: .leading) {
-                                    Text("#\(item)")
-                                        .font(Theme.Fonts.captionRoundedBold)
-                                        .foregroundColor(.white)
-                                        .padding(.horizontal, 9)
-                                        .padding(.vertical, 4)
-                                        .background(Theme.Colors.pill, in: Capsule())
-                                    
-                                    Text("<First Name> <Last Name>")
-                                        .foregroundColor(Theme.Colors.text)
-                                        .font(Theme.Fonts.bodyRoundedBold)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.horizontal, 9)
-                                .padding(.vertical, 4)
-                                .background(Theme.Colors.detailBackground)
-                                
-                            }
-                            .clipShape(RoundedRectangle(cornerRadius: 16,
-                                                        style: .continuous))
-                            .shadow(color: Theme.Colors.text.opacity(0.1),
-                                    radius: 2,
-                                    x: 0,
-                                    y: 1)
-                            
+                            PersonItemView(user: item)
                         }
-                        
                     }
                     .padding(6)
                 }
@@ -64,11 +32,24 @@ struct PeopleView: View {
             .navigationTitle("People")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
-                    Symbols.plus
-                        .font(Theme.Fonts.headlineRoundedBold)
+                    create
                 }
             }
         }
+    }
+}
+
+private extension PeopleView {
+    var create: some View {
+        Button(action: {}) {
+            Symbols.plus
+                .font(Theme.Fonts.headlineRoundedBold)
+        }
+    }
+    
+    var background: some View {
+        Theme.Colors.background
+            .ignoresSafeArea(edges: .top)
     }
 }
 
@@ -83,3 +64,4 @@ struct PeopleView_Previews: PreviewProvider {
         }
     }
 }
+

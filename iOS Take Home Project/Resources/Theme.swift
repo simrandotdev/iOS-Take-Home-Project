@@ -8,9 +8,19 @@
 import SwiftUI
 
 enum Theme {
-    static let background =  Color("background")
-    static let detailBackground =  Color("detail-background")
-    static let text =  Color("text")
-    static let pill =  Color("pill")
+    
+    enum Colors {
+        static let background =  Color("background")
+        static let detailBackground =  Color("detail-background")
+        static let text =  Color("text")
+        static let pill =  Color("pill")
+    }
+    
+    enum Fonts {
+        static let captionRoundedBold = Font.system(.caption, design: .rounded).bold()
+        static let headlineRoundedBold = Font.system(.headline, design: .rounded).bold()
+        static let bodyRoundedBold = Font.system(.body, design: .rounded)
+            
+    }
 }
 

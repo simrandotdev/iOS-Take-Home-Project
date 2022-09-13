@@ -19,6 +19,7 @@
 		3D2A6DFA28D0DD7600BF2614 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6DF928D0DD7600BF2614 /* User.swift */; };
 		3D2A6DFC28D0DD8500BF2614 /* Suppoprt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6DFB28D0DD8500BF2614 /* Suppoprt.swift */; };
 		3D2A6DFF28D0DDA100BF2614 /* StaticJSONMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6DFE28D0DDA100BF2614 /* StaticJSONMapper.swift */; };
+		3D2A6E0128D0E0AF00BF2614 /* PeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6E0028D0E0AF00BF2614 /* PeopleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		3D2A6DF928D0DD7600BF2614 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3D2A6DFB28D0DD8500BF2614 /* Suppoprt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suppoprt.swift; sourceTree = "<group>"; };
 		3D2A6DFE28D0DDA100BF2614 /* StaticJSONMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticJSONMapper.swift; sourceTree = "<group>"; };
+		3D2A6E0028D0E0AF00BF2614 /* PeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 		3D2A6DE628CF946800BF2614 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3D2A6E0028D0E0AF00BF2614 /* PeopleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D2A6DDD28CF8D8600BF2614 /* Symbols.swift in Sources */,
+				3D2A6E0128D0E0AF00BF2614 /* PeopleView.swift in Sources */,
 				3D2A6DDF28CF906500BF2614 /* Theme.swift in Sources */,
 				3D2A6DFF28D0DDA100BF2614 /* StaticJSONMapper.swift in Sources */,
 				3D2A6DD028CF8D1700BF2614 /* ContentView.swift in Sources */,

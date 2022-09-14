@@ -14,6 +14,7 @@ enum Theme {
         static let detailBackground =  Color("detail-background")
         static let text =  Color("text")
         static let pill =  Color("pill")
+        static let placeholder = Color.gray.opacity(0.25)
     }
     
     enum Fonts {

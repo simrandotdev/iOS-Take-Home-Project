@@ -20,7 +20,6 @@ struct PersonItemView: View {
                     .scaledToFill()
             } placeholder: {
                 ProgressView()
-                
             }
             .frame(maxWidth: .infinity, minHeight: 130)
             .background(Theme.Colors.placeholder)

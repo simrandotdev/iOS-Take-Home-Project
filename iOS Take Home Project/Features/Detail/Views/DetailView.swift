@@ -11,12 +11,16 @@ struct DetailView: View {
     
     var user: User
     
+    @State private var userInfo: UserDetailResponse?
+    
     var body: some View {
         ZStack {
-            Theme.Colors.background.background(ignoresSafeAreaEdges: .top)
+            background
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
+                    
+                    avatar
                     general
                     
                     VStack(alignment: .leading, spacing: 8) {
@@ -36,17 +40,28 @@ struct DetailView: View {
                 .padding()
             }
         }
+        .navigationTitle(userInfo?.data.firstName ?? "Details")
+        .onAppear {
+            do {
+                let res = try StaticJSONMapper.decode(file: "UserStaticData",
+                                                      type: UsersResponse.self)
+                guard let foundUser = res.data.first(where: { $0.id == user.id }) else { return }
+                self.userInfo = UserDetailResponse(data: foundUser, support: res.support)
+            } catch {
+                // TODO: Handle any errors
+                print("error")
+            }
+        }
     }
     
     private var general: some View {
         VStack(alignment: .leading, spacing: 8) {
             PillView(id: user.id)
-            
-            TitleSubtitleView(title: "First Name", subtitle: "\(user.firstName)")
+            TitleSubtitleView(title: "First Name", subtitle: "\(userInfo?.data.firstName ?? "<First Name>")")
             Divider()
-            TitleSubtitleView(title: "Last Name", subtitle: "\(user.lastName)")
+            TitleSubtitleView(title: "Last Name", subtitle: "\(userInfo?.data.lastName ?? "<Last Name>")")
             Divider()
-            TitleSubtitleView(title: "Email", subtitle: "\(user.email)")
+            TitleSubtitleView(title: "Email", subtitle: "\(userInfo?.data.email ?? "<Email>")")
         }
         .padding(.horizontal, 8)
         .padding(.vertical, 18)
@@ -54,14 +69,41 @@ struct DetailView: View {
                     in: RoundedRectangle(cornerRadius: 16,
                                          style: .continuous))
     }
+    
+    @ViewBuilder
+    var avatar: some View {
+        if let avatarString = userInfo?.data.avatar,
+            let avatarUrl = URL(string: avatarString) {
+            AsyncImage(url: avatarUrl) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(height: 250)
+                    .clipped()
+            } placeholder: {
+                ProgressView()
+            }
+            .frame(maxWidth: .infinity, minHeight: 250)
+            .background(Theme.Colors.placeholder)
+            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        }
+    }
+    
+    var background: some View {
+        Theme.Colors.background
+            .ignoresSafeArea(edges: .top)
+    }
+    
 }
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(user: User(id: 1,
-                              email: "user@gmail.com",
-                              firstName: "John",
-                              lastName: "Doe",
-                              avatar: ""))
+        NavigationView {
+            DetailView(user: User(id: 1,
+                                  email: "user@gmail.com",
+                                  firstName: "John",
+                                  lastName: "Doe",
+                                  avatar: "https://reqres.in/img/faces/1-image.jpg"))
+        }
     }
 }

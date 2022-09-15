@@ -15,6 +15,7 @@ struct PeopleView: View {
     ]
     
     @State private var users: [User] = []
+    @State private var showCreateView = false
     
     var body: some View {
         NavigationView {
@@ -51,13 +52,18 @@ struct PeopleView: View {
                     print("error")
                 }
             }
+            .sheet(isPresented: $showCreateView) {
+                CreateView()
+            }
         }
     }
 }
 
 private extension PeopleView {
     var create: some View {
-        Button(action: {}) {
+        Button(action: {
+            showCreateView = true
+        }) {
             Symbols.plus
                 .font(Theme.Fonts.headlineRoundedBold)
         }

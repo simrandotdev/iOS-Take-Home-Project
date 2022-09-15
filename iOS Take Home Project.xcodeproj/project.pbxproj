@@ -22,6 +22,7 @@
 		3D2A6E0128D0E0AF00BF2614 /* PeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6E0028D0E0AF00BF2614 /* PeopleView.swift */; };
 		3D2A6E0328D13BDE00BF2614 /* PersonItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6E0228D13BDE00BF2614 /* PersonItemView.swift */; };
 		3D2A6E0628D13CAC00BF2614 /* PillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6E0528D13CAC00BF2614 /* PillView.swift */; };
+		3D4CBE5328D36B2500F6AADF /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4CBE5228D36B2500F6AADF /* CreateView.swift */; };
 		3D66275928D21CF300FECC54 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D66275828D21CF300FECC54 /* DetailView.swift */; };
 		3D66275B28D2211900FECC54 /* TitleSubtitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D66275A28D2211900FECC54 /* TitleSubtitleView.swift */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 		3D2A6E0028D0E0AF00BF2614 /* PeopleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleView.swift; sourceTree = "<group>"; };
 		3D2A6E0228D13BDE00BF2614 /* PersonItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonItemView.swift; sourceTree = "<group>"; };
 		3D2A6E0528D13CAC00BF2614 /* PillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillView.swift; sourceTree = "<group>"; };
+		3D4CBE5228D36B2500F6AADF /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
 		3D66275828D21CF300FECC54 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		3D66275A28D2211900FECC54 /* TitleSubtitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSubtitleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -209,6 +211,7 @@
 		3D2A6DEB28CF94B900BF2614 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3D4CBE5228D36B2500F6AADF /* CreateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				3D2A6E0628D13CAC00BF2614 /* PillView.swift in Sources */,
 				3D2A6DDD28CF8D8600BF2614 /* Symbols.swift in Sources */,
 				3D2A6E0128D0E0AF00BF2614 /* PeopleView.swift in Sources */,
+				3D4CBE5328D36B2500F6AADF /* CreateView.swift in Sources */,
 				3D2A6DDF28CF906500BF2614 /* Theme.swift in Sources */,
 				3D2A6DFF28D0DDA100BF2614 /* StaticJSONMapper.swift in Sources */,
 				3D2A6DD028CF8D1700BF2614 /* ContentView.swift in Sources */,

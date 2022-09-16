@@ -17,7 +17,6 @@ struct CreateView: View {
                 firstName
                 lastName
                 job
-                
                 Section {
                    submit
                 }

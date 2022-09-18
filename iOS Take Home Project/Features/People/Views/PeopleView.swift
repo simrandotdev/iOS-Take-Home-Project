@@ -14,26 +14,20 @@ struct PeopleView: View {
         GridItem(.flexible())
     ]
     
-    @State private var users: [User] = []
     @State private var showCreateView = false
+    @StateObject private var viewModel = PeopleView.ViewModel()
     
     var body: some View {
         NavigationView {
             ZStack {
                 background
                 
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 16) {
-                        ForEach(users, id: \.id) { user in
-                            NavigationLink {
-                                DetailView(user: user)
-                            } label: {
-                                PersonItemView(user: user)
-                            }
-                        }
-                    }
-                    .padding(6)
+                if viewModel.isLoading {
+                    ProgressView()
+                } else {
+                    peopleList
                 }
+                
                     
             }
             .navigationTitle("People")
@@ -43,21 +37,8 @@ struct PeopleView: View {
                 }
             }
             .onAppear {
-                
-                if users.count > 0 { return }
-                
-                NetworkingManager.shared.request("https://reqres.in/api/users?page=1&per_page=20",
-                                                 type: UsersResponse.self) { result in
-                    switch result {
-                        
-                    case .success(let response):
-                        DispatchQueue.main.async {
-                            self.users += response.data
-                        }
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
+                if viewModel.people.count > 0 { return }
+                viewModel.fetchPeople()
             }
             .sheet(isPresented: $showCreateView) {
                 CreateView()
@@ -79,6 +60,21 @@ private extension PeopleView {
     var background: some View {
         Theme.Colors.background
             .ignoresSafeArea(edges: .top)
+    }
+    
+    var peopleList: some View {
+        ScrollView {
+            LazyVGrid(columns: columns, spacing: 16) {
+                ForEach(viewModel.people, id: \.id) { user in
+                    NavigationLink {
+                        DetailView(user: user)
+                    } label: {
+                        PersonItemView(user: user)
+                    }
+                }
+            }
+            .padding(6)
+        }
     }
 }
 

@@ -21,17 +21,23 @@ struct PeopleView: View {
         NavigationView {
             ZStack {
                 background
-                
-                if viewModel.isLoading {
+                switch viewModel.viewState {
+                case .loading:
                     ProgressView()
-                } else {
+                case .success:
                     peopleList
+                case .error(_):
+                    Text("Something went wrong!")
+                case .empty:
+                    EmptyView()
                 }
-                
-                    
             }
             .navigationTitle("People")
             .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    refresh
+                }
+                
                 ToolbarItem(placement: .primaryAction) {
                     create
                 }
@@ -53,6 +59,15 @@ private extension PeopleView {
             showCreateView = true
         }) {
             Symbols.plus
+                .font(Theme.Fonts.headlineRoundedBold)
+        }
+    }
+    
+    var refresh: some View {
+        Button(action: {
+            viewModel.fetchPeople()
+        }) {
+            Symbols.refresh
                 .font(Theme.Fonts.headlineRoundedBold)
         }
     }

@@ -13,7 +13,7 @@ extension PeopleView {
     final class ViewModel: ObservableObject {
         
         @Published var people: [User] = []
-        @Published var isLoading: Bool = false
+        @Published var viewState: ViewState = .empty
         
         private var networkingManager: NetworkingManager
         
@@ -23,7 +23,7 @@ extension PeopleView {
         
         func fetchPeople(waitFor time: Double = 1.5) {
             
-            isLoading = true
+            viewState = .loading
             
             DispatchQueue.main.asyncAfter(deadline: .now() + time) { [weak self] in
                 
@@ -39,11 +39,11 @@ extension PeopleView {
                     case .success(let response):
                         DispatchQueue.main.async {
                             self.people += response.data
-                            self.isLoading = false
+                            self.viewState = .success
                         }
                     case .failure(let error):
                         print(error)
-                        self.isLoading = false
+                        self.viewState = .error(error: error)
                     }
                 }
             }

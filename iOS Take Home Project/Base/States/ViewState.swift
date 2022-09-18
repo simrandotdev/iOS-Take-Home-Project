@@ -8,3 +8,10 @@
 
 // TODO: Create different view states for the UI.
 import Foundation
+
+enum ViewState {
+    case loading
+    case success
+    case error(error: Error)
+    case empty
+}

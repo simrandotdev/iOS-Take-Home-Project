@@ -1,5 +1,5 @@
 //
-//  PeopleViewModel.swift
+//  DetailViewModel.swift
 //  iOS Take Home Project
 //
 //  Created by Simran Preet Narang on 2022-09-18.
@@ -7,13 +7,12 @@
 
 import Foundation
 
-
-extension PeopleView {
+extension DetailView {
     
-    final class ViewModel: ObservableObject {
+    class ViewModel: ObservableObject {
         
-        @Published var people: [User] = []
         @Published var viewState: ViewState = .empty
+        @Published var user: User? = nil
         
         private var networkingManager: NetworkingManager
         
@@ -21,16 +20,15 @@ extension PeopleView {
             self.networkingManager = networkingManager
         }
         
-        func fetchPeople(waitFor time: Double = 1.5) {
-            
+        func fetchDetails(withId id: Int, andTime time: Double = 1.5) {
             viewState = .loading
             
             DispatchQueue.main.asyncAfter(deadline: .now() + time) { [weak self] in
                 
                 guard let self = self else { return }
                 
-                self.networkingManager.request("https://reqres.in/api/users?page=1&per_page=20",
-                                                 type: UsersResponse.self) { [weak self] result in
+                self.networkingManager.request("https://reqres.in/api/users/\(id)",
+                                                 type: UserDetailResponse.self) { [weak self] result in
                     
                     guard let self = self else { return }
                     
@@ -38,7 +36,7 @@ extension PeopleView {
                         
                     case .success(let response):
                         DispatchQueue.main.async {
-                            self.people = response.data
+                            self.user = response.data
                             self.viewState = .success
                         }
                     case .failure(let error):

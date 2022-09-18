@@ -10,8 +10,8 @@ import SwiftUI
 struct DetailView: View {
     
     var user: User
-    
-    @State private var userInfo: UserDetailResponse?
+
+    @StateObject private var viewModel = DetailView.ViewModel()
     
     var body: some View {
         ZStack {
@@ -20,48 +20,36 @@ struct DetailView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
                     
-                    avatar
-                    general
-                    
-                    VStack(alignment: .leading, spacing: 8) {
-                        
-                        TitleSubtitleView(title: "Support Reqres", subtitle: "")
-                        Link(destination: URL(string: "https://reqres.in/#support-heading")!) {
-                            Label("https://reqres.in/#support-heading", systemImage: "link")
-                        }
-                        Divider().hidden()
+                    switch viewModel.viewState {
+                    case .loading:
+                        ProgressView()
+                    case .success:
+                        avatar
+                        userDetails
+                        support
+                    case .error(_):
+                        Text("Something went wrong!")
+                    case .empty:
+                        EmptyView()
                     }
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 18)
-                    .background(Theme.Colors.detailBackground,
-                                in: RoundedRectangle(cornerRadius: 16,
-                                                     style: .continuous))
                 }
                 .padding()
             }
         }
-        .navigationTitle(userInfo?.data.firstName ?? "Details")
+        .navigationTitle(viewModel.user?.firstName ?? "Details")
         .onAppear {
-            do {
-                let res = try StaticJSONMapper.decode(file: "UserStaticData",
-                                                      type: UsersResponse.self)
-                guard let foundUser = res.data.first(where: { $0.id == user.id }) else { return }
-                self.userInfo = UserDetailResponse(data: foundUser, support: res.support)
-            } catch {
-                // TODO: Handle any errors
-                print("error")
-            }
+            viewModel.fetchDetails(withId: user.id)
         }
     }
     
-    private var general: some View {
+    private var userDetails: some View {
         VStack(alignment: .leading, spacing: 8) {
             PillView(id: user.id)
-            TitleSubtitleView(title: "First Name", subtitle: "\(userInfo?.data.firstName ?? "<First Name>")")
+            TitleSubtitleView(title: "First Name", subtitle: "\(viewModel.user?.firstName ?? "<First Name>")")
             Divider()
-            TitleSubtitleView(title: "Last Name", subtitle: "\(userInfo?.data.lastName ?? "<Last Name>")")
+            TitleSubtitleView(title: "Last Name", subtitle: "\(viewModel.user?.lastName ?? "<Last Name>")")
             Divider()
-            TitleSubtitleView(title: "Email", subtitle: "\(userInfo?.data.email ?? "<Email>")")
+            TitleSubtitleView(title: "Email", subtitle: "\(viewModel.user?.email ?? "<Email>")")
         }
         .padding(.horizontal, 8)
         .padding(.vertical, 18)
@@ -72,7 +60,7 @@ struct DetailView: View {
     
     @ViewBuilder
     var avatar: some View {
-        if let avatarString = userInfo?.data.avatar,
+        if let avatarString = viewModel.user?.avatar,
             let avatarUrl = URL(string: avatarString) {
             AsyncImage(url: avatarUrl) { image in
                 image
@@ -87,6 +75,22 @@ struct DetailView: View {
             .background(Theme.Colors.placeholder)
             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
         }
+    }
+    
+    private var support: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            
+            TitleSubtitleView(title: "Support Reqres", subtitle: "")
+            Link(destination: URL(string: "https://reqres.in/#support-heading")!) {
+                Label("https://reqres.in/#support-heading", systemImage: "link")
+            }
+            Divider().hidden()
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 18)
+        .background(Theme.Colors.detailBackground,
+                    in: RoundedRectangle(cornerRadius: 16,
+                                         style: .continuous))
     }
     
     var background: some View {

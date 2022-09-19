@@ -29,7 +29,7 @@ struct CreateView: View {
                     dismiss()
                 }
             }
-            .alert(viewModel.errorMessage, isPresented: $viewModel.isError, actions: {
+            .alert(viewModel.error?.errorDescription ?? "Something went wrong.", isPresented: $viewModel.isError, actions: {
                 Button("OK", action: {})
             })
             .alert("User created Successfully 😀", isPresented: $viewModel.isSuccessfullySubmitted, actions: {

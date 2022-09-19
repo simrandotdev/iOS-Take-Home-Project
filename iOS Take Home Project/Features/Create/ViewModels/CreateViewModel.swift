@@ -15,8 +15,9 @@ extension CreateView {
         @Published var lastName = ""
         @Published var job = ""
         @Published var isError = false
-        @Published var errorMessage = ""
+        @Published var error: AppError? = nil
         @Published var isSuccessfullySubmitted = false
+        
         
         private var networkingManager: NetworkingManager
         
@@ -27,37 +28,39 @@ extension CreateView {
         func create() {
             
             if firstName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                print("❌ First Name cannot be empty")
+                
                 isError = true
-                errorMessage = "❌ First Name cannot be empty"
+                error = AppError(withMessage: "❌ First Name cannot be empty")
                 return
             }
             
             if lastName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                print("❌ Last Name cannot be empty")
+
                 isError = true
-                errorMessage = "❌ Last Name cannot be empty"
+                error = AppError(withMessage: "❌ Last Name cannot be empty")
                 return
             }
             
             if job.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                print("❌ Job cannot be empty")
+                
                 isError = true
-                errorMessage = "❌ Job cannot be empty"
+                error = AppError(withMessage: "❌ Job cannot be empty")
                 return
             }
             
             let newPerson = NewPerson(firstName: firstName, lastName: lastName, job: job)
             networkingManager.makePostRequest("https://reqres.in/api/users", body: newPerson) { result in
                 
-                switch result {
-                case .success():
-                    print("✅ Successfully saved User")
-                    self.isSuccessfullySubmitted = true
-                case .failure(_):
-                    print("❌ Failed to save user")
-                    self.isError = true
-                    self.errorMessage = "❌ Failed to save user"
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success():
+                        print("✅ Successfully saved User")
+                        self.isSuccessfullySubmitted = true
+                    case .failure(let appError):
+                        print("❌ Failed to save user")
+                        self.isError = true
+                        self.error = appError
+                    }
                 }
             }
         }

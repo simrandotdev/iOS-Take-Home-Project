@@ -34,11 +34,11 @@ struct PeopleView: View {
             }
             .navigationTitle("People")
             .toolbar {
-                ToolbarItem(placement: .primaryAction) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     refresh
                 }
                 
-                ToolbarItem(placement: .primaryAction) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     create
                 }
             }

@@ -102,6 +102,28 @@ enum AppError: Error {
     case errorWithMessage(message: String)
     case invalidRequest
     case noDataFound
+    
+    init(withMessage message: String) {
+        
+        print("❌ \(message)")
+        self = .errorWithMessage(message: message)
+    }
+    
+    var errorDescription: String {
+        
+        switch self {
+        case .invalidURL:
+            return "The resource you are trying to reach is invalid"
+        case .failedToDecodeResponse:
+            return  "Failed to decode your response"
+        case .errorWithMessage(let message):
+            return message
+        case .invalidRequest:
+            return "Invalid request. Please try again."
+        case .noDataFound:
+            return "You were expecting something, but were not able to find it."
+        }
+    }
 }
 
 

@@ -13,16 +13,16 @@ final class NetworkingManager {
     private init() {}
     
     
-    
-    func request<T: Codable>(_ absoluteUrl: String,
-                             type: T.Type,
-                             completion: @escaping (Result<T, AppError>) -> Void) {
+    func makeGetRequest<T: Codable>(_ absoluteUrl: String,
+                                    type: T.Type,
+                                    completion: @escaping (Result<T, AppError>) -> Void) {
         
         guard let url = URL(string: absoluteUrl) else {
             completion(.failure(.invalidURL))
             return
         }
-        let request = URLRequest(url: url)
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
         
         let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
             
@@ -56,6 +56,43 @@ final class NetworkingManager {
         
         dataTask.resume()
     }
+    
+    func makePostRequest<T: Codable>(_ absoluteUrl: String,
+                                     body: T,
+                         completion: @escaping (Result<Void, AppError>) -> Void) {
+        
+        guard let url = URL(string: absoluteUrl) else {
+            completion(.failure(.invalidURL))
+            return
+        }
+        var  request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.allHTTPHeaderFields = [
+            "Content-Type": "application/json"
+        ]
+        
+        if let httpBody = try? JSONEncoder().encode(body) {
+            request.httpBody = httpBody
+        }
+        
+        let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if error != nil {
+                completion(.failure(.errorWithMessage(message: "Request Failed")))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse,
+                  (200...300) ~= response.statusCode else {
+                completion(.failure(.invalidRequest))
+                return
+            }
+            
+            completion(.success(()))
+        }
+        
+        dataTask.resume()
+    }
 }
 
 
@@ -65,4 +102,10 @@ enum AppError: Error {
     case errorWithMessage(message: String)
     case invalidRequest
     case noDataFound
+}
+
+
+enum HttpMethod {
+    case GET
+    case POST
 }

@@ -27,7 +27,7 @@ extension DetailView {
                 
                 guard let self = self else { return }
                 
-                self.networkingManager.request("https://reqres.in/api/users/\(id)",
+                self.networkingManager.makeGetRequest("https://reqres.in/api/users/\(id)",
                                                  type: UserDetailResponse.self) { [weak self] result in
                     
                     guard let self = self else { return }

@@ -11,6 +11,8 @@ struct CreateView: View {
     
     @Environment(\.dismiss) private var dismiss
     
+    @StateObject private var viewModel = CreateView.ViewModel()
+    
     var body: some View {
         NavigationView {
             Form {
@@ -27,6 +29,13 @@ struct CreateView: View {
                     dismiss()
                 }
             }
+            .alert(viewModel.errorMessage, isPresented: $viewModel.isError, actions: {
+                Button("OK", action: {})
+            })
+            .alert("User created Successfully 😀", isPresented: $viewModel.isSuccessfullySubmitted, actions: {
+                Button("OK", action: { dismiss() })
+            })
+            
         }
     }
 }
@@ -41,20 +50,20 @@ struct CreateView_Previews: PreviewProvider {
 private extension CreateView {
     
     var firstName: some View {
-        TextField("First Name", text: .constant(""))
+        TextField("First Name", text: $viewModel.firstName)
     }
     
     var lastName: some View {
-        TextField("Last Name", text: .constant(""))
+        TextField("Last Name", text: $viewModel.lastName)
     }
     
     var job: some View {
-        TextField("Job", text: .constant(""))
+        TextField("Job", text: $viewModel.job)
     }
     
     var submit: some View {
         Button("Submit") {
-            // TODO: Handle action later.
+            viewModel.create()
         }
     }
 }

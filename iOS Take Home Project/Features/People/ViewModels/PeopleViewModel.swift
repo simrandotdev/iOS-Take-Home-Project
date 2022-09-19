@@ -29,7 +29,7 @@ extension PeopleView {
                 
                 guard let self = self else { return }
                 
-                self.networkingManager.request("https://reqres.in/api/users?page=1&per_page=20",
+                self.networkingManager.makeGetRequest("https://reqres.in/api/users?page=1&per_page=20",
                                                  type: UsersResponse.self) { [weak self] result in
                     
                     guard let self = self else { return }

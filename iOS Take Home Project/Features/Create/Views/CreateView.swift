@@ -46,6 +46,7 @@ struct CreateView: View {
                 Button("OK", action: {
                     dismiss()
                     successFullAction()
+                    triggerHaptics()
                 })
                 
             })

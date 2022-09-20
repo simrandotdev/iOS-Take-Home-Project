@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D1D48FF28DA737F00CF338A /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1D48FE28DA737F00CF338A /* HapticsManager.swift */; };
 		3D2A6DCE28CF8D1700BF2614 /* iOS_Take_Home_ProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6DCD28CF8D1700BF2614 /* iOS_Take_Home_ProjectApp.swift */; };
 		3D2A6DD028CF8D1700BF2614 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6DCF28CF8D1700BF2614 /* ContentView.swift */; };
 		3D2A6DD228CF8D1800BF2614 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D2A6DD128CF8D1800BF2614 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D1D48FE28DA737F00CF338A /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		3D2A6DCA28CF8D1700BF2614 /* iOS Take Home Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS Take Home Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D2A6DCD28CF8D1700BF2614 /* iOS_Take_Home_ProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_Take_Home_ProjectApp.swift; sourceTree = "<group>"; };
 		3D2A6DCF28CF8D1700BF2614 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -78,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D1D48FD28DA737600CF338A /* Haptics */ = {
+			isa = PBXGroup;
+			children = (
+				3D1D48FE28DA737F00CF338A /* HapticsManager.swift */,
+			);
+			path = Haptics;
+			sourceTree = "<group>";
+		};
 		3D2A6DC128CF8D1700BF2614 = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +152,7 @@
 		3D2A6DE128CF944A00BF2614 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				3D1D48FD28DA737600CF338A /* Haptics */,
 				3D6105F628D7D12200827A28 /* States */,
 				3D831AF328D4DF0500B6ABE3 /* APIs */,
 				3D2A6E0428D13CA300BF2614 /* Views */,
@@ -390,6 +401,7 @@
 				3D2A6E0128D0E0AF00BF2614 /* PeopleView.swift in Sources */,
 				3D4CBE5328D36B2500F6AADF /* CreateView.swift in Sources */,
 				3D831AF528D4DF1100B6ABE3 /* NetworkingManager.swift in Sources */,
+				3D1D48FF28DA737F00CF338A /* HapticsManager.swift in Sources */,
 				3D2A6DDF28CF906500BF2614 /* Theme.swift in Sources */,
 				3D6105FA28D7E2D400827A28 /* DetailViewModel.swift in Sources */,
 				3D66A11E28DA0CAA000D7615 /* CreateValidator.swift in Sources */,

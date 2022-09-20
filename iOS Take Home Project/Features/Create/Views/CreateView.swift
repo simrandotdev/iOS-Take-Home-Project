@@ -15,14 +15,22 @@ struct CreateView: View {
     
     var body: some View {
         NavigationView {
-            Form {
-                firstName
-                lastName
-                job
-                Section {
-                   submit
+            
+            Group {
+                if viewModel.isLoading {
+                    ProgressView()
+                } else {
+                    Form {
+                        firstName
+                        lastName
+                        job
+                        Section {
+                           submit
+                        }
+                    }
                 }
             }
+            
             .navigationTitle("Create")
             .toolbar {
                 Button("Done") {

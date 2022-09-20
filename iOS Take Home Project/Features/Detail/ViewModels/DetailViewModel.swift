@@ -23,26 +23,21 @@ extension DetailView {
         func fetchDetails(withId id: Int, andTime time: Double = 1.5) {
             viewState = .loading
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + time) { [weak self] in
+            networkingManager.makeGetRequest("https://reqres.in/api/users/\(id)?delay=1.75",
+                                             type: UserDetailResponse.self) { [weak self] result in
                 
                 guard let self = self else { return }
                 
-                self.networkingManager.makeGetRequest("https://reqres.in/api/users/\(id)",
-                                                 type: UserDetailResponse.self) { [weak self] result in
+                switch result {
                     
-                    guard let self = self else { return }
-                    
-                    switch result {
-                        
-                    case .success(let response):
-                        DispatchQueue.main.async {
-                            self.user = response.data
-                            self.viewState = .success
-                        }
-                    case .failure(let error):
-                        print(error)
-                        self.viewState = .error(error: error)
+                case .success(let response):
+                    DispatchQueue.main.async {
+                        self.user = response.data
+                        self.viewState = .success
                     }
+                case .failure(let error):
+                    print(error)
+                    self.viewState = .error(error: error)
                 }
             }
         }

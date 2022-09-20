@@ -17,7 +17,7 @@ extension CreateView {
         @Published var isError = false
         @Published var error: AppError? = nil
         @Published var isSuccessfullySubmitted = false
-        
+        @Published var isLoading = false
         
         private var networkingManager: NetworkingManager
         
@@ -48,18 +48,21 @@ extension CreateView {
                 return
             }
             
+            isLoading = true
             let newPerson = NewPerson(firstName: firstName, lastName: lastName, job: job)
-            networkingManager.makePostRequest("https://reqres.in/api/users", body: newPerson) { result in
+            networkingManager.makePostRequest("https://reqres.in/api/users?delay=1.5", body: newPerson) { result in
                 
                 DispatchQueue.main.async {
                     switch result {
                     case .success():
                         print("✅ Successfully saved User")
                         self.isSuccessfullySubmitted = true
+                        self.isLoading = false
                     case .failure(let appError):
                         print("❌ Failed to save user")
                         self.isError = true
                         self.error = appError
+                        self.isLoading = false
                     }
                 }
             }

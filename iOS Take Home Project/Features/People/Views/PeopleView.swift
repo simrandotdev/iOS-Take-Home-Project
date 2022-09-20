@@ -15,6 +15,7 @@ struct PeopleView: View {
     ]
     
     @State private var showCreateView = false
+    @State private var shouldShowSuccess = false
     @StateObject private var viewModel = PeopleView.ViewModel()
     
     var body: some View {
@@ -47,7 +48,23 @@ struct PeopleView: View {
                 viewModel.fetchPeople()
             }
             .sheet(isPresented: $showCreateView) {
-                CreateView()
+                CreateView {
+                    withAnimation(.spring().delay(0.25)) {
+                        self.shouldShowSuccess = true
+                    }
+                }
+            }
+            .overlay {
+                if shouldShowSuccess {
+                    CheckmarkPopupView()
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.25) {
+                                withAnimation(.spring().delay(0.25)) {
+                                    self.shouldShowSuccess = false
+                                }
+                            }
+                        }
+                }
             }
         }
     }

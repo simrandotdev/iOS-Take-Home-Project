@@ -23,6 +23,7 @@ enum Theme {
         static let bodyRoundedBold = Font.system(.body, design: .rounded).bold()
         static let bodyRoundedSemiBold = Font.system(.body, design: .rounded).weight(.semibold)
         static let subHeadline = Font.system(.subheadline, design: .rounded)
+        static let largeTitleRoundedBold = Font.system(.largeTitle, design: .rounded).bold()
             
     }
 }

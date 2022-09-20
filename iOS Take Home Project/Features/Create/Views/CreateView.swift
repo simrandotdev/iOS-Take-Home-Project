@@ -13,6 +13,8 @@ struct CreateView: View {
     
     @StateObject private var viewModel = CreateView.ViewModel()
     
+    let successFullAction: () -> Void
+    
     var body: some View {
         NavigationView {
             
@@ -41,7 +43,11 @@ struct CreateView: View {
                 Button("OK", action: {})
             })
             .alert("User created Successfully 😀", isPresented: $viewModel.isSuccessfullySubmitted, actions: {
-                Button("OK", action: { dismiss() })
+                Button("OK", action: {
+                    dismiss()
+                    successFullAction()
+                })
+                
             })
             
         }
@@ -50,7 +56,9 @@ struct CreateView: View {
 
 struct CreateView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateView()
+        CreateView(successFullAction: {
+            
+        })
     }
 }
 

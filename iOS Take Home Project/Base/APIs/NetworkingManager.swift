@@ -13,18 +13,15 @@ final class NetworkingManager {
     private init() {}
     
     
-    func makeGetRequest<T: Codable>(_ absoluteUrl: String,
+    func makeGetRequest<T: Codable>(_ endpoint: Endpoint,
                                     type: T.Type,
-                                    completion: @escaping (Result<T, AppError>) -> Void) {
+                                    completion: @escaping (Result<T, AppError>) -> Void) throws {
         
-        guard let url = URL(string: absoluteUrl) else {
-            completion(.failure(.invalidURL))
-            return
+        guard let urlRequest = try? endpoint.urlRequest else {
+            throw AppError.invalidRequest
         }
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
         
-        let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             
             if error != nil {
                 completion(.failure(.errorWithMessage(message: "Request Failed")))
@@ -57,25 +54,14 @@ final class NetworkingManager {
         dataTask.resume()
     }
     
-    func makePostRequest<T: Codable>(_ absoluteUrl: String,
-                                     body: T,
-                         completion: @escaping (Result<Void, AppError>) -> Void) {
+    func makePostRequest(_ endpoint: Endpoint,
+                         completion: @escaping (Result<Void, AppError>) -> Void) throws {
         
-        guard let url = URL(string: absoluteUrl) else {
-            completion(.failure(.invalidURL))
-            return
-        }
-        var  request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.allHTTPHeaderFields = [
-            "Content-Type": "application/json"
-        ]
-        
-        if let httpBody = try? JSONEncoder().encode(body) {
-            request.httpBody = httpBody
+        guard let urlRequest = try? endpoint.urlRequest else {
+            throw AppError.invalidRequest
         }
         
-        let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             
             if error != nil {
                 completion(.failure(.errorWithMessage(message: "Request Failed")))
@@ -99,6 +85,7 @@ final class NetworkingManager {
 enum AppError: Error {
     case invalidURL
     case failedToDecodeResponse
+    case failedToEncode
     case errorWithMessage(message: String)
     case invalidRequest
     case noDataFound
@@ -122,6 +109,8 @@ enum AppError: Error {
             return "Invalid request. Please try again."
         case .noDataFound:
             return "You were expecting something, but were not able to find it."
+        case .failedToEncode:
+            return "Failed to encode"
         }
     }
 }
@@ -129,5 +118,5 @@ enum AppError: Error {
 
 enum HttpMethod {
     case GET
-    case POST
+    case POST(body: Codable)
 }

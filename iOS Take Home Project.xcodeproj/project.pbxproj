@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3D1D48FF28DA737F00CF338A /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1D48FE28DA737F00CF338A /* HapticsManager.swift */; };
+		3D1D490128DAB3C500CF338A /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1D490028DAB3C500CF338A /* Endpoint.swift */; };
 		3D2A6DCE28CF8D1700BF2614 /* iOS_Take_Home_ProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6DCD28CF8D1700BF2614 /* iOS_Take_Home_ProjectApp.swift */; };
 		3D2A6DD028CF8D1700BF2614 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2A6DCF28CF8D1700BF2614 /* ContentView.swift */; };
 		3D2A6DD228CF8D1800BF2614 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D2A6DD128CF8D1800BF2614 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		3D1D48FE28DA737F00CF338A /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
+		3D1D490028DAB3C500CF338A /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		3D2A6DCA28CF8D1700BF2614 /* iOS Take Home Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS Take Home Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D2A6DCD28CF8D1700BF2614 /* iOS_Take_Home_ProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_Take_Home_ProjectApp.swift; sourceTree = "<group>"; };
 		3D2A6DCF28CF8D1700BF2614 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				3D831AF428D4DF1100B6ABE3 /* NetworkingManager.swift */,
+				3D1D490028DAB3C500CF338A /* Endpoint.swift */,
 			);
 			path = APIs;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				3D66A11B28DA073D000D7615 /* CheckmarkPopupView.swift in Sources */,
 				3D2A6DFA28D0DD7600BF2614 /* User.swift in Sources */,
 				3D6105FE28D809F300827A28 /* NewPerson.swift in Sources */,
+				3D1D490128DAB3C500CF338A /* Endpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +551,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iOS Take Home Project/Preview Content\"";
+				DEVELOPMENT_TEAM = 8J72S889CZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS-Take-Home-Project-Info.plist";
@@ -575,6 +580,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iOS Take Home Project/Preview Content\"";
+				DEVELOPMENT_TEAM = 8J72S889CZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS-Take-Home-Project-Info.plist";

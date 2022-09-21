@@ -33,7 +33,8 @@ extension CreateView {
                 try createValidator.validate(newPerson)
                 
                 isLoading = true
-                networkingManager.makePostRequest("https://reqres.in/api/users?delay=1.5", body: newPerson) { result in
+                
+                try networkingManager.makePostRequest(.create(body: newPerson)) { result in
                     
                     DispatchQueue.main.async {
                         switch result {
@@ -49,7 +50,8 @@ extension CreateView {
                         }
                     }
                 }
-            } catch {
+            }
+            catch {
                 isError = true
                 
                 if let error = error as? CreateValidatorErrors {

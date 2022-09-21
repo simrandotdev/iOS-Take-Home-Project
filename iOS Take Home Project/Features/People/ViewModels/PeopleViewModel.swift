@@ -14,6 +14,8 @@ extension PeopleView {
         
         @Published var people: [User] = []
         @Published var viewState: ViewState = .empty
+        @Published var isError = false
+        @Published var error: AppError? = nil
         
         private var networkingManager: NetworkingManager
         
@@ -24,22 +26,32 @@ extension PeopleView {
         func fetchPeople(waitFor time: Double = 1.5) {
             
             viewState = .loading
-            
-            self.networkingManager.makeGetRequest("https://reqres.in/api/users?page=1&per_page=20&delay=1.75",
-                                             type: UsersResponse.self) { [weak self] result in
-                
-                guard let self = self else { return }
-                
-                switch result {
+            do {
+                try networkingManager.makeGetRequest(.people,
+                                                 type: UsersResponse.self) { [weak self] result in
                     
-                case .success(let response):
-                    DispatchQueue.main.async {
-                        self.people = response.data
-                        self.viewState = .success
+                    guard let self = self else { return }
+                    
+                    switch result {
+                        
+                    case .success(let response):
+                        DispatchQueue.main.async {
+                            self.people = response.data
+                            self.viewState = .success
+                        }
+                    case .failure(let error):
+                        print(error)
+                        self.viewState = .error(error: error)
                     }
-                case .failure(let error):
-                    print(error)
-                    self.viewState = .error(error: error)
+                }
+            }
+            catch {
+                isError = true
+                
+                if let error = error as? CreateValidatorErrors {
+                    self.error = AppError(withMessage: error.errorDescription)
+                } else {
+                    self.error = AppError(withMessage: "Something went wrong, please try again.")
                 }
             }
         }

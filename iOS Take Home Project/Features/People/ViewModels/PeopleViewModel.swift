@@ -23,26 +23,15 @@ extension PeopleView {
             self.networkingManager = networkingManager
         }
         
-        func fetchPeople(waitFor time: Double = 1.5) {
+        func fetchPeople(waitFor time: Double = 1.5) async {
             
             viewState = .loading
             do {
-                try networkingManager.makeGetRequest(.people,
-                                                 type: UsersResponse.self) { [weak self] result in
+                let response = try await networkingManager.makeGetRequest(.people, type: UsersResponse.self)
                     
-                    guard let self = self else { return }
-                    
-                    switch result {
-                        
-                    case .success(let response):
-                        DispatchQueue.main.async {
-                            self.people = response.data
-                            self.viewState = .success
-                        }
-                    case .failure(let error):
-                        print(error)
-                        self.viewState = .error(error: error)
-                    }
+                DispatchQueue.main.async {
+                    self.people = response.data
+                    self.viewState = .success
                 }
             }
             catch {

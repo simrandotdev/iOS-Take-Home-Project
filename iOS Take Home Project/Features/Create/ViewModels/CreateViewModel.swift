@@ -27,33 +27,25 @@ extension CreateView {
             self.createValidator = createValidator
         }
         
-        func create() {
+        func create() async {
             do {
                 let newPerson = NewPerson(firstName: firstName, lastName: lastName, job: job)
                 try createValidator.validate(newPerson)
                 
                 isLoading = true
                 
-                try networkingManager.makePostRequest(.create(body: newPerson)) { result in
-                    
-                    DispatchQueue.main.async {
-                        switch result {
-                        case .success():
-                            print("✅ Successfully saved User")
-                            self.isSuccessfullySubmitted = true
-                            self.isLoading = false
-                        case .failure(let appError):
-                            print("❌ Failed to save user")
-                            self.isError = true
-                            self.error = appError
-                            self.isLoading = false
-                        }
-                    }
+                try await networkingManager.makePostRequest(.create(body: newPerson))
+                
+                DispatchQueue.main.async {
+                    print("✅ Successfully saved User")
+                    self.isSuccessfullySubmitted = true
+                    self.isLoading = false
                 }
+                
             }
             catch {
                 isError = true
-                
+                self.isLoading = false
                 if let error = error as? CreateValidatorErrors {
                     self.error = AppError(withMessage: error.errorDescription)
                 } else {

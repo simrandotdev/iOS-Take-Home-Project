@@ -22,34 +22,27 @@ extension DetailView {
             self.networkingManager = networkingManager
         }
         
-        func fetchDetails(withId id: Int, andTime time: Double = 1.5) {
+        func fetchDetails(withId id: Int, andTime time: Double = 1.5) async {
             viewState = .loading
             
             do {
-                try networkingManager.makeGetRequest(.detail(id: id),
-                                                 type: UserDetailResponse.self) { [weak self] result in
-                    
-                    guard let self = self else { return }
-                    
-                    switch result {
-                        
-                    case .success(let response):
-                        DispatchQueue.main.async {
-                            self.user = response.data
-                            self.viewState = .success
-                        }
-                    case .failure(let error):
-                        print(error)
-                        self.viewState = .error(error: error)
-                    }
+                let response = try await networkingManager.makeGetRequest(.detail(id: id),
+                                                                      type: UserDetailResponse.self)
+                DispatchQueue.main.async {
+                    self.user = response.data
+                    self.viewState = .success
                 }
+                
             } catch {
                 isError = true
                 
                 if let error = error as? CreateValidatorErrors {
                     self.error = AppError(withMessage: error.errorDescription)
+                    self.viewState = .error(error: error)
                 } else {
                     self.error = AppError(withMessage: "Something went wrong, please try again.")
+                    self.viewState = .error(error: error)
+                    self.viewState = .error(error: error)
                 }
             }
         }

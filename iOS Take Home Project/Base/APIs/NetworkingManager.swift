@@ -14,71 +14,43 @@ final class NetworkingManager {
     
     
     func makeGetRequest<T: Codable>(_ endpoint: Endpoint,
-                                    type: T.Type,
-                                    completion: @escaping (Result<T, AppError>) -> Void) throws {
+                                    type: T.Type) async throws -> T {
         
         guard let urlRequest = try? endpoint.urlRequest else {
             throw AppError.invalidRequest
         }
         
-        let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            
-            if error != nil {
-                completion(.failure(.errorWithMessage(message: "Request Failed")))
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse,
-                  (200...300) ~= response.statusCode else {
-                completion(.failure(.invalidRequest))
-                return
-            }
-            
-            guard let data = data else {
-                completion(.failure(.noDataFound))
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let res = try decoder.decode(T.self, from: data)
-                completion(.success(res))
-            } catch {
-                completion(.failure(.failedToDecodeResponse))
-                return
-            }
-            
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        
+        guard let response = response as? HTTPURLResponse,
+              (200...300) ~= response.statusCode else {
+            throw AppError.invalidRequest
         }
         
-        dataTask.resume()
+        do {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            let res = try decoder.decode(T.self, from: data)
+            return res
+        } catch {
+            throw AppError.failedToDecodeResponse
+        }
     }
     
-    func makePostRequest(_ endpoint: Endpoint,
-                         completion: @escaping (Result<Void, AppError>) -> Void) throws {
+    func makePostRequest(_ endpoint: Endpoint) async throws {
         
         guard let urlRequest = try? endpoint.urlRequest else {
             throw AppError.invalidRequest
         }
         
-        let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            
-            if error != nil {
-                completion(.failure(.errorWithMessage(message: "Request Failed")))
-                return
-            }
-            
-            guard let response = response as? HTTPURLResponse,
-                  (200...300) ~= response.statusCode else {
-                completion(.failure(.invalidRequest))
-                return
-            }
-            
-            completion(.success(()))
-        }
+        let (_, response) = try await URLSession.shared.data(for: urlRequest)
         
-        dataTask.resume()
+        guard let response = response as? HTTPURLResponse,
+              (200...300) ~= response.statusCode else {
+            throw AppError.invalidRequest
+        }
     }
+    
 }
 
 

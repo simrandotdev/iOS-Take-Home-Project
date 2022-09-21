@@ -80,7 +80,7 @@ private extension CreateView {
     
     var submit: some View {
         Button("Submit") {
-            viewModel.create()
+            Task { await viewModel.create() }
         }
     }
 }

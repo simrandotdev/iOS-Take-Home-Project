@@ -45,7 +45,7 @@ struct PeopleView: View {
             }
             .onAppear {
                 if viewModel.people.count > 0 { return }
-                viewModel.fetchPeople()
+                Task { await viewModel.fetchPeople() }
             }
             .sheet(isPresented: $showCreateView) {
                 CreateView {
@@ -82,7 +82,7 @@ private extension PeopleView {
     
     var refresh: some View {
         Button(action: {
-            viewModel.fetchPeople()
+            Task { await viewModel.fetchPeople() }
         }) {
             Symbols.refresh
                 .font(Theme.Fonts.headlineRoundedBold)

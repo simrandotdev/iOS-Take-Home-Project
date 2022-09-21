@@ -38,7 +38,7 @@ struct DetailView: View {
         }
         .navigationTitle(viewModel.user?.firstName ?? "Details")
         .onAppear {
-            viewModel.fetchDetails(withId: user.id)
+            Task { await viewModel.fetchDetails(withId: user.id) }
         }
     }
     

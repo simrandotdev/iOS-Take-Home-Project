@@ -7,7 +7,13 @@
 
 import Foundation
 
-struct CreateValidator {
+protocol CreateValidatorProtocol {
+    
+    func validate(_ person: NewPerson) throws
+}
+
+
+struct CreateValidator: CreateValidatorProtocol {
     
     func validate(_ person: NewPerson) throws {
         if person.firstName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {

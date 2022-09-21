@@ -16,9 +16,9 @@ extension DetailView {
         @Published var isError = false
         @Published var error: AppError? = nil
         
-        private var networkingManager: NetworkingManager
+        private var networkingManager: Networking
         
-        init(with networkingManager: NetworkingManager = NetworkingManager.shared) {
+        init(with networkingManager: Networking = NetworkingManager()) {
             self.networkingManager = networkingManager
         }
         

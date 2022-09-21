@@ -19,10 +19,10 @@ extension CreateView {
         @Published var isSuccessfullySubmitted = false
         @Published var isLoading = false
         
-        private var networkingManager: NetworkingManager
-        private var createValidator: CreateValidator
+        private var networkingManager: Networking
+        private var createValidator: CreateValidatorProtocol
         
-        init(with networkingManager: NetworkingManager = NetworkingManager.shared, createValidator: CreateValidator = CreateValidator()) {
+        init(with networkingManager: Networking = NetworkingManager(), createValidator: CreateValidatorProtocol = CreateValidator()) {
             self.networkingManager = networkingManager
             self.createValidator = createValidator
         }

@@ -7,10 +7,20 @@
 
 import Foundation
 
-final class NetworkingManager {
-    static let shared = NetworkingManager()
+protocol Networking {
     
-    private init() {}
+    func makeGetRequest<T: Codable>(_ endpoint: Endpoint,
+                                    type: T.Type) async throws -> T
+    func makePostRequest(_ endpoint: Endpoint) async throws
+}
+
+final class NetworkingManager: Networking {
+    
+    private let urlSession: URLSession
+    
+    init(urlSession: URLSession = URLSession.shared) {
+        self.urlSession = urlSession
+    }
     
     
     func makeGetRequest<T: Codable>(_ endpoint: Endpoint,
@@ -20,7 +30,7 @@ final class NetworkingManager {
             throw AppError.invalidRequest
         }
         
-        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        let (data, response) = try await urlSession.data(for: urlRequest)
         
         guard let response = response as? HTTPURLResponse,
               (200...300) ~= response.statusCode else {
@@ -43,7 +53,7 @@ final class NetworkingManager {
             throw AppError.invalidRequest
         }
         
-        let (_, response) = try await URLSession.shared.data(for: urlRequest)
+        let (_, response) = try await urlSession.data(for: urlRequest)
         
         guard let response = response as? HTTPURLResponse,
               (200...300) ~= response.statusCode else {

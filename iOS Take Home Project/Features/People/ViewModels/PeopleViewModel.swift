@@ -23,6 +23,7 @@ extension PeopleView {
             self.networkingManager = networkingManager
         }
         
+        @MainActor
         func fetchPeople(waitFor time: Double = 1.5) async {
             
             viewState = .loading

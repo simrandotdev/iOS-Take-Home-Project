@@ -27,6 +27,7 @@ extension CreateView {
             self.createValidator = createValidator
         }
         
+        @MainActor
         func create() async {
             do {
                 let newPerson = NewPerson(firstName: firstName, lastName: lastName, job: job)

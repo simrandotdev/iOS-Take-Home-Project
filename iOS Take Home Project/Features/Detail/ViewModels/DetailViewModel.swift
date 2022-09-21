@@ -22,6 +22,7 @@ extension DetailView {
             self.networkingManager = networkingManager
         }
         
+        @MainActor
         func fetchDetails(withId id: Int, andTime time: Double = 1.5) async {
             viewState = .loading
             

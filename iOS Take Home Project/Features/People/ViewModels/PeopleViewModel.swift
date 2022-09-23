@@ -17,6 +17,8 @@ extension PeopleView {
         @Published var isError = false
         @Published var error: AppError? = nil
         
+        private var page = 1
+        
         private var networkingManager: Networking
         
         init(with networkingManager: Networking = NetworkingManager()) {
@@ -28,7 +30,7 @@ extension PeopleView {
             
             viewState = .loading
             do {
-                let response = try await networkingManager.makeGetRequest(.people, type: UsersResponse.self)
+                let response = try await networkingManager.makeGetRequest(.people(page: page), type: UsersResponse.self)
                     
                 DispatchQueue.main.async {
                     self.people = response.data

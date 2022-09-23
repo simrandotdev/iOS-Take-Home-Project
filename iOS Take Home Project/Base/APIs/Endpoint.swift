@@ -13,7 +13,7 @@ enum Endpoint {
         return "reqres.in"
     }
     
-    case people
+    case people(page: Int)
     case detail(id: Int)
     case create(body: Codable)
     
@@ -33,11 +33,22 @@ enum Endpoint {
         urlComponents.scheme = "https"
         urlComponents.host = host
         urlComponents.path = path
-        
+        urlComponents.queryItems = queryItems.map({ key, value in
+            return URLQueryItem(name: key, value: value)
+        })
         #if DEBUG
-        urlComponents.queryItems = [URLQueryItem(name: "delay", value: "1.5")]
+        urlComponents.queryItems?.append(contentsOf: [URLQueryItem(name: "delay", value: "1.5")])
         #endif
         return urlComponents.url
+    }
+    
+    var queryItems: [String: String] {
+        switch self {
+        case .people(let page):
+            return ["page": "\(page)"]
+        case .detail, .create:
+            return [:]
+        }
     }
     
     var methodType: String {

@@ -24,7 +24,7 @@ enum Endpoint {
         case .detail(let id):
             return "/api/users/\(id)"
         case .create:
-            return "/api/users?delay=1.5"
+            return "/api/users"
         }
     }
     

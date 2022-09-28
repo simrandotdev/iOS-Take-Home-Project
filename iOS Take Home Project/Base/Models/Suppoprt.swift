@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Support: Codable {
+struct Support: Codable, Equatable {
     let url: String
     let text: String
 }
